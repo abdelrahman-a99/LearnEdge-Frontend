@@ -1,5 +1,7 @@
 'use client';
 
+import React from "react";
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,9 +10,7 @@ import { ThemeProvider } from "@/context/ThemeContext";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import React from "react";
-
-import "../app/globals.css";
+// import "../app/globals.css";
 
 const queryClient = new QueryClient();
 

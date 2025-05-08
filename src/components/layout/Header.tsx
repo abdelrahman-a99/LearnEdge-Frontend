@@ -1,12 +1,16 @@
 'use client';
 
+import React, { useState } from "react";
+
 import { usePathname } from "next/navigation";
-import { Menu, X, Book } from "lucide-react";
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
-import React, { useState } from "react";
-import Link from "next/link";
+import { Menu, X, Book } from "lucide-react";
+
+// import '../../app/globals.css';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +25,7 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container mx-auto flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
             <Book className="h-6 w-6 text-edu-primary" />

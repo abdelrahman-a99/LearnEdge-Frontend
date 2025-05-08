@@ -1,8 +1,10 @@
+import type { Metadata } from 'next';
+
 import Providers from "@/components/Providers";
 
-import "./globals.css";
+// import "./globals.css";
 
-export const metadata = {
+export const metadata: Metadata  = {
   title: 'LearnEdge',
   description: 'Empowering Egyptian high school students with quality education',
 };

@@ -2,12 +2,12 @@ import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 
 export default {
-  darkMode: "class",
-  // darkMode: ["class"],
+  darkMode: 'class',
   content: [
-    "./src/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
+    './src/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
   ],
   prefix: "",
   theme: {
@@ -20,52 +20,67 @@ export default {
     },
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        // Education theme colors
+        // edu: {
+        //   primary: '#0369a1',     // Deep blue
+        //   secondary: '#0284c7',   // Medium blue
+        //   accent: '#06b6d4',      // Teal
+        //   highlight: '#fb923c',   // Orange accent
+        //   success: '#22c55e',     // Green
+        //   error: '#ef4444',       // Red
+        //   warning: '#f59e0b',     // Amber
+        //   info: '#3b82f6',        // Blue
+        //   light: '#f0f9ff',       // Very light blue
+        //   dark: '#0f172a',        // Very dark blue
+        // }
+
+        // flattened custom colors
+        // 'edu-primary': '#0369a1',      // Deep blue (main brand color)
+        // 'edu-secondary': '#0284c7',    // Medium blue (secondary accent)
+        // 'edu-accent': '#06b6d4',       // Teal (used for highlights or buttons)
+        // 'edu-highlight': '#fb923c',    // Orange accent (for emphasis or highlights)
+        // 'edu-success': '#22c55e',      // Green (used for success messages or confirmations)
+        // 'edu-error': '#ef4444',        // Red (used for error states or alerts)
+        // 'edu-warning': '#f59e0b',      // Amber (used for warning messages)
+        // 'edu-info': '#3b82f6',         // Blue (used for informational messages)
+        // 'edu-light': '#f0f9ff',        // Very light blue (backgrounds or light sections)
+        // 'edu-dark': '#0f172a',         // Very dark blue (dark mode background or text)
+
+        // CSS variable-driven colors
+        border: 'oklch(var(--border))',
+        input: 'oklch(var(--input))',
+        ring: 'oklch(var(--ring))',
+        background: 'oklch(var(--background))',
+        foreground: 'oklch(var(--foreground))',
+
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
+          DEFAULT: 'oklch(var(--primary))',
+          foreground: 'oklch(var(--primary-foreground))',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
+          DEFAULT: 'oklch(var(--secondary))',
+          foreground: 'oklch(var(--secondary-foreground))',
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
+          DEFAULT: 'oklch(var(--destructive))',
+          foreground: 'oklch(var(--destructive-foreground))',
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
+          DEFAULT: 'oklch(var(--muted))',
+          foreground: 'oklch(var(--muted-foreground))',
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
+          DEFAULT: 'oklch(var(--accent))',
+          foreground: 'oklch(var(--accent-foreground))',
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
+          DEFAULT: 'oklch(var(--popover))',
+          foreground: 'oklch(var(--popover-foreground))',
         },
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
+          DEFAULT: 'oklch(var(--card))',
+          foreground: 'oklch(var(--card-foreground))',
         },
-        // Education theme colors
-        edu: {
-          primary: '#0369a1',     // Deep blue
-          secondary: '#0284c7',   // Medium blue
-          accent: '#06b6d4',      // Teal
-          highlight: '#fb923c',   // Orange accent
-          success: '#22c55e',     // Green
-          error: '#ef4444',       // Red
-          warning: '#f59e0b',     // Amber
-          info: '#3b82f6',        // Blue
-          light: '#f0f9ff',       // Very light blue
-          dark: '#0f172a',        // Very dark blue
-        }
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -96,5 +111,23 @@ export default {
       }
     }
   },
-  plugins: [animate],
+  plugins: [
+    animate,
+    // plugin(function ({ addUtilities, theme }) {
+    //   const eduColors = theme('colors.edu');
+
+    //   const newUtilities = Object.fromEntries(
+    //     Object.entries(eduColors).map(([name, value]) => {
+    //       return [
+    //         `.bg-edu-${name}`,
+    //         {
+    //           backgroundColor: value as string,
+    //         },
+    //       ];
+    //     })
+    //   );
+
+    //   addUtilities(newUtilities, ['responsive', 'hover']);
+    // }),
+  ],
 } satisfies Config;

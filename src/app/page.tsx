@@ -1,22 +1,21 @@
+import Link from "next/link";
+
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 
-// import { BookOpen, Users, Award, Monitor } from "lucide-react";
 import { BookOpen, Users, Award } from "lucide-react";
 
-import Link from "next/link";
-import './globals.css';
+// import './globals.css';
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* <h1>Home Page</h1> */}
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-edu-primary to-edu-accent py-16 md:py-24 text-white">
+        <section className="bg-gradient-to-r from-edu-primary to-edu-accent py-16 md:py-24 text-foreground">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-3xl md:text-5xl font-bold mb-6">
               The Future of Learning for Egyptian High Schools
@@ -26,10 +25,10 @@ export default function Home() {
               learning paths for high school students across Egypt.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button size="lg" variant="default" className="bg-white text-edu-primary hover:bg-white/90" asChild>
+              <Button size="lg" variant="default" className="bg-foreground text-background hover:bg-foreground/90" asChild>
                 <Link href="/auth/register">Get Started</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10" asChild>
+              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground/10" asChild>
                 <Link href="/auth/login">Login</Link>
               </Button>
             </div>
@@ -89,7 +88,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
-                <div className="w-16 h-16 bg-edu-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+                <div className="w-16 h-16 bg-background text-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
                 <h3 className="text-xl font-semibold mb-2">Sign Up</h3>
                 <p className="text-muted-foreground">
                   Create an account as a student or teacher to get started.
@@ -97,7 +96,7 @@ export default function Home() {
               </div>
 
               <div className="text-center">
-                <div className="w-16 h-16 bg-edu-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+                <div className="w-16 h-16 bg-background text-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
                 <h3 className="text-xl font-semibold mb-2">Access Content</h3>
                 <p className="text-muted-foreground">
                   Browse courses by grade level or subject and start learning.
@@ -105,7 +104,7 @@ export default function Home() {
               </div>
 
               <div className="text-center">
-                <div className="w-16 h-16 bg-edu-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+                <div className="w-16 h-16 bg-background text-foreground rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
                 <h3 className="text-xl font-semibold mb-2">Learn & Progress</h3>
                 <p className="text-muted-foreground">
                   Complete lessons, take quizzes, and track your improvement.
@@ -116,7 +115,7 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-r from-edu-primary to-edu-accent text-white">
+        <section className="py-16 bg-gradient-to-r from-edu-primary to-edu-accent text-foreground">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-6">
               Ready to Transform Your Learning Experience?
@@ -125,7 +124,7 @@ export default function Home() {
               Join thousands of students and teachers across Egypt who are
               already using our platform to enhance their educational journey.
             </p>
-            <Button size="lg" variant="default" className="bg-white text-edu-primary hover:bg-white/90" asChild>
+            <Button size="lg" variant="default" className="bg-foreground text-background hover:bg-foreground/90" asChild>
               <Link href="/auth/register">Get Started Now</Link>
             </Button>
           </div>

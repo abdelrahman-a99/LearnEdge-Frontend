@@ -1,12 +1,15 @@
+import React from "react";
+
+import Link from "next/link";
+
 import { Book } from "lucide-react";
 
-import React from "react";
-import Link from "next/link";
+import '../../app/globals.css';
 
 export const Footer = () => {
   return (
     <footer className="bg-background border-t py-8 md:py-12">
-      <div className="container grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="flex flex-col">
           <Link href="/" className="flex items-center gap-2 mb-4">
             <Book className="h-6 w-6 text-edu-primary" />
@@ -45,7 +48,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="container mt-8 pt-6 border-t">
+      <div className="mt-8 pt-6 border-t">
         <p className="text-center text-muted-foreground">
           © {new Date().getFullYear()} EduEgypt. All rights reserved.
         </p>
