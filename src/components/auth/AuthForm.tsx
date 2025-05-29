@@ -2,36 +2,46 @@
 
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-// import { useNavigate } from "react-router-dom";
-import { useRouter } from "next/navigation"; // ✅ use this in Next.js
-
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { authService } from "@/lib/auth";
 
 type AuthFormProps = {
   type: "login" | "register";
 };
 
 export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
-  // const navigate = useNavigate();
-  const router = useRouter(); // ✅ replaces useNavigate
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [role, setRole] = useState<"student" | "teacher">("student");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    // In a real application, this would connect to a backend
-    if (type === "login") {
-      toast.success("Logged in successfully!");
-      // Navigate based on role (in a real app this would come from backend)
-      // navigate(role === "student" ? "/dashboard/student" : "/dashboard/teacher");
-      router.push("/dashboard"); // ✅ use this instead of navigate("/dashboard")
-    } else {
-      toast.success("Account created successfully!");
-      // navigate("/auth/login");
-      router.push("/auth/login"); // ✅ redirect to login after register
+    try {
+      if (type === "login") {
+        const response = await authService.login({ email, password });
+        authService.setToken(response.token);
+        toast.success("Logged in successfully!");
+        router.push("/dashboard");
+      } else {
+        await authService.register({
+          email,
+          password,
+          firstName,
+          lastName
+        });
+        toast.success("Account created successfully!");
+        router.push("/auth/login");
+      }
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "An error occurred");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -42,20 +52,36 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {type === "register" && (
-          <div className="space-y-2">
-            <label htmlFor="name" className="text-sm font-medium">
-              Full Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background"
-              placeholder="Enter your full name"
-            />
-          </div>
+          <>
+            <div className="space-y-2">
+              <label htmlFor="firstName" className="text-sm font-medium">
+                First Name
+              </label>
+              <input
+                id="firstName"
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background"
+                placeholder="Enter your first name"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="lastName" className="text-sm font-medium">
+                Last Name
+              </label>
+              <input
+                id="lastName"
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background"
+                placeholder="Enter your last name"
+              />
+            </div>
+          </>
         )}
 
         <div className="space-y-2">
@@ -83,41 +109,14 @@ export const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            minLength={8}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-background"
             placeholder="Enter your password"
           />
         </div>
 
-        {type === "register" && (
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Role</label>
-            <div className="flex gap-4">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="role"
-                  checked={role === "student"}
-                  onChange={() => setRole("student")}
-                  className="h-4 w-4 text-primary"
-                />
-                Student
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name="role"
-                  checked={role === "teacher"}
-                  onChange={() => setRole("teacher")}
-                  className="h-4 w-4 text-primary"
-                />
-                Teacher
-              </label>
-            </div>
-          </div>
-        )}
-
-        <Button type="submit" className="w-full">
-          {type === "login" ? "Login" : "Create Account"}
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? "Loading..." : type === "login" ? "Login" : "Create Account"}
         </Button>
       </form>
 
